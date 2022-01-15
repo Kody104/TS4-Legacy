@@ -1,0 +1,988 @@
+{
+  "traits": [
+    {
+      "name": "Active",
+      "description": "These Sims tend to be Energized, can Pump Up other Sims, and may become upset if they don't exercise for a period of time.",
+      "category": "emotional",
+      "icon_url": "../img/trait/Trait_TS4_Active.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Lazy"
+        }
+      ]
+    },
+    {
+      "name": "Cheerful",
+      "description": "These Sims tend to be Happier than other Sims.",
+      "category": "emotional",
+      "icon_url": "../img/trait/Trait_TS4_Cheerful.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Gloomy"
+        },
+        {
+          "trait": "Hot-Headed"
+        }
+      ]
+    },
+    {
+      "name": "Creative",
+      "description": "These Sims tend to be Inspired, can Share Creative Ideas with other Sims, and may become upset if they're not creative for a period of time.",
+      "category": "emotional",
+      "icon_url": "../img/trait/Trait_TS4_Creative.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Genius",
+      "description": "These Sims tend to be Focused, can Share Ideas with other Sims, and may become upset if they haven't improved their Mental Skills for some time.",
+      "category": "emotional",
+      "icon_url": "../img/trait/Trait_TS4_Genius.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Gloomy",
+      "description": "These Sims tend to be Sad, can Share Melancholy Thoughts to other Sims, and while sad, gain a boost to their Creative Skill.",
+      "category": "emotional",
+      "icon_url": "../img/trait/Trait_TS4_Gloomy.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Cheerful"
+        },
+        {
+          "trait": "Hot-Headed"
+        }
+      ]
+    },
+    {
+      "name": "Goofball",
+      "description": "These Sims tend to be Playful.",
+      "category": "emotional",
+      "icon_url": "../img/trait/Trait_TS4_Goofball.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Snob"
+        }
+      ]
+    },
+    {
+      "name": "High Maintenance",
+      "description": "These Sims require extra work to keep in good condition. Their problems sometimes appear trivial, and may even appear out of the blue. These struggles can be remedied through mindful habits, which puts them in a state of catharsis.",
+      "category": "emotional",
+      "icon_url": "../img/trait/Trait_TS4_High_Maintenance.webp",
+      "base_pack": {
+        "name": "spa_day",
+        "icon_url": "../img/base_pack/spa_day.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Hot-Headed",
+      "description": "These Sims tend to be Angry, can Rile up other Sims, and become Angry when targeted with Mischief.",
+      "category": "emotional",
+      "icon_url":"../img/trait/Trait_TS4_Hot-Headed.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Cheerful"
+        },
+        {
+          "trait": "Gloomy"
+        }
+      ]
+    },
+    {
+      "name": "Romantic",
+      "description": "These Sims tend to be Flirty and may become Sad if they don't have any Romantic social interactions for a period of time.",
+      "category": "emotional",
+      "icon_url":"../img/trait/Trait_TS4_Romantic.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Unflirty"
+        }
+      ]
+    },
+    {
+      "name": "Self-Assured",
+      "description": "These Sims tend to be Confident.",
+      "category": "emotional",
+      "icon_url":"../img/trait/Trait_TS4_Self-Assured.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Unflirty",
+      "description": "These Sims get Tense around Flirty Sims and seldom get Flirty themselves. It's difficult for them to be Romantic in public. ",
+      "category": "emotional",
+      "icon_url":"../img/trait/Trait_TS4_Unflirty.webp",
+      "base_pack": {
+        "name": "city_living",
+        "icon_url": "../img/base_pack/city_living.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Romantic"
+        }
+      ]
+    },
+    {
+      "name": "Art Lover",
+      "description": "These Sims gain powerful Moodlets from Viewing works of art and can Admire Art and Discuss Art in unique ways.",
+      "category": "hobby",
+      "icon_url":"../img/trait/Trait_TS4_Art_Lover.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Bookworm",
+      "description": "These Sims gain powerful Moodlets from reading Books and can Analyze Books and Discuss Books in unique ways.",
+      "category": "hobby",
+      "icon_url":"../img/trait/Trait_TS4_Bookworm.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Foodie",
+      "description": "These Sims become Happy and have Fun when eating good food, become Uncomfortable when eating bad food, and can Watch Cooking Shows for ideas.",
+      "category": "hobby",
+      "icon_url":"../img/trait/Trait_TS4_Foodie.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Freegan"
+        },
+        {
+          "trait": "Glutton"
+        }
+      ]
+    },
+    {
+      "name": "Geek",
+      "description": "These Sims become Happy when Reading Sci-Fi or Playing Video Games, may become Tense if they haven't played much, are better at finding Collectibles, and can Discuss Geek Things with other Geek Sims.",
+      "category": "hobby",
+      "icon_url": "../img/trait/Trait_TS4_Geek.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Maker",
+      "description": "These Sims become happy when making things. They become sad when it's been too long since completing a project on a Fabricator, Candlemaking Station, Juice Fizzer, or Woodworking Table. They do not receive negative effects from crafting or repair failures.",
+      "category": "hobby",
+      "icon_url": "../img/trait/Trait_TS4_Maker.webp",
+      "base_pack": {
+        "name": "eco_lifestyle",
+        "icon_url": "../img/eco_lifestyle.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Clumsy"
+        },
+        {
+          "trait": "Lazy"
+        }
+      ]
+    },
+    {
+      "name": "Music Lover",
+      "description": "These Sims gain powerful Moodlets and boost their Fun Need when Listening to Music and become Happy when playing instruments.",
+      "category": "hobby",
+      "icon_url":"../img/trait/Trait_TS4_Music_Lover.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Perfectionist",
+      "description": "These Sims take longer to craft items but tend to make them higher quality, gain powerful Moodlets after crafting a high quality item, and gain negative Moodlets after crafting a low quality item.",
+      "category": "hobby",
+      "icon_url":"../img/trait/Trait_TS4_Perfectionist.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Adventurous",
+      "description": "These Sims seek out new and unique experiences.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Adventurous.webp",
+      "base_pack": {
+        "name": "snowy_escape",
+        "icon_url": "../img/base_pack/snowy_escape.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Lazy"
+        }
+      ]
+    },
+    {
+      "name": "Ambitious",
+      "description": "These Sims gain powerful Moodlets from career success, gain negative Moodlets from career failure, and may become Tense if not promoted.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Ambitious.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Freegan"
+        },
+        {
+          "trait": "Lazy"
+        }
+      ]
+    },
+    {
+      "name": "Animal Enthusiast",
+      "description": "These Sims are obsessed with animals, and will seek their company often. They will have an easier time caring for animals and getting closer to them.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Animal_Enthusiast.webp",
+      "base_pack": {
+        "name": "cottage_living",
+        "icon_url": "../img/base_pack/cottage_living.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Cat Lover",
+      "description": "These Sims tend to make cats their companions, preferring the company of cats to other Sims.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Cat_Lover.webp",
+      "base_pack": {
+        "name": "cats_and_dogs",
+        "icon_url": "../img/base_pack/cats_and_dogs.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Child of the Islands",
+      "description": "These Sims experience a spiritual connection to islands of Sulani. Honor the islands by partaking in their culture, summon powerful elementals and reap the rewards of their blessings—or the consequences of their disfavor.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Child_of_the_Islands.webp",
+      "base_pack": {
+        "name": "island_living",
+        "icon_url": "../img/base_pack/island_living.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Child of the Ocean",
+      "description": "Answer the call of the ocean! Sims with this trait will prefer water related activities and feel closer to denizens of the sea.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Child_of_the_Ocean.webp",
+      "base_pack": {
+        "name": "island_living",
+        "icon_url": "../img/base_pack/island_living.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Childish",
+      "description": "These Sims gain powerful Moodlets from watching the Kids Network, become Playful when playing with Children, and become Happy when playing with Children's toys.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Childish.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Evil"
+        },
+        {
+          "trait": "Hates Children"
+        },
+        {
+          "trait": "Snob"
+        }
+      ]
+    },
+    {
+      "name": "Clumsy",
+      "description": "These Sims tend to fail more often at physical activities and tend to laugh at failure instead of becoming upset.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Clumsy.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Maker"
+        }
+      ]
+    },
+    {
+      "name": "Dance Machine",
+      "description": "These Sims can't wait to get down, boogie, and party all night! When at venues like Bars, Nightclubs, and Lounges, these Sims can get a burst of energy with the Party Time interaction.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Dance_Machine.webp",
+      "base_pack": {
+        "name": "get_together",
+        "icon_url": "../img/base_pack/get_together.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Dog Lover",
+      "description": "These Sims love to be near dogs. They will gain relationships faster with dogs and socialize with dogs more than the average Sim.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Dog_Lover.webp",
+      "base_pack": {
+        "name": "cats_and_dogs",
+        "icon_url": "../img/base_pack/cats_and_dogs.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Erratic",
+      "description": "These Sims can Talk to themselves and have unpredictable Emotions.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Erratic.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Freegan",
+      "description": "These Sims reject consumerism and prefer to reduce wasteful spending by any means. They enjoy finding re-used or thrown away goods and foods. In fact, they have the best luck at finding the highest-quality treasures in Dumpsters! They may become tense or uncomfortable if they spend too much time earning or spending Simoleons.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Freegan.webp",
+      "base_pack": {
+        "name": "eco_lifestyle",
+        "icon_url": "../img/base_pack/eco_lifestyle.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Ambitious"
+        },
+        {
+          "trait": "Foodie"
+        },
+        {
+          "trait": "Materialistic"
+        },
+        {
+          "trait": "Snob"
+        },
+        {
+          "trait": "Squeamish"
+        }
+      ]
+    },
+    {
+      "name": "Glutton",
+      "description": "These Sims have a greater negative reaction to Hunger, always enjoy eating, no matter the quality of the food, and will eat Spoiled Food.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Glutton.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Foodie"
+        },
+        {
+          "trait": "Squeamish"
+        }
+      ]
+    },
+    {
+      "name": "Green Fiend",
+      "description": "These Sims are happiest when living on a green street and will continuously work towards making their environment more eco-friendly.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Green_Fiend.webp",
+      "base_pack": {
+        "name": "eco_lifestyle",
+        "icon_url": "../img/base_pack/eco_lifestyle.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Kleptomaniac",
+      "description": "These Sims don't mind \"borrowing\" things from others with a simple swipe, but will get Tense when they have not swiped anything in a while.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Kleptomaniac.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Good"
+        }
+      ]
+    },
+    {
+      "name": "Lactose Intolerant",
+      "description": "These Sims will become sick if they eat dairy, but will feel great if they have avoided it for a while.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Lactose_Intolerant.webp",
+      "base_pack": {
+        "name": "cottage_living",
+        "icon_url": "../img/base_pack/cottage_living.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Lazy",
+      "description": "These Sims gain powerful Moodlets from Watching TV or Napping as well as from Comfortable furniture, become Fatigued more quickly from exercise, and grow Tense when performing household chores.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Lazy.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Active"
+        },
+        {
+          "trait": "Adventurous"
+        },
+        {
+          "trait": "Ambitious"
+        },
+        {
+          "trait": "Maker"
+        },
+        {
+          "trait": "Neat"
+        }
+      ]
+    },
+    {
+      "name": "Loves Outdoors",
+      "description": "These Sims can Enthuse about Nature to other Sims and become Happy when Outdoors.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Loves_Outdoors.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Squeamish"
+        }
+      ]
+    },
+    {
+      "name": "Materialistic",
+      "description": "These Sims can Admire and Brag about Possessions and become Sad when they haven't purchased a new item for a period of time.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Materialistic.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Freegan"
+        }
+      ]
+    },
+    {
+      "name": "Neat",
+      "description": "These Sims become Happy and have Fun when performing household chores, can have a Cleaning Frenzy, and become really Uncomfortable in dirty surroundings.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Neat.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Lazy"
+        },
+        {
+          "trait": "Slob"
+        }
+      ]
+    },
+    {
+      "name": "Recycle Disciple",
+      "description": "These Sims are rabid recyclers that benefit from recycling and rummaging for bits and pieces, but should they go too long without indulging in their hobby...",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Recycle_Disciple.webp",
+      "base_pack": {
+        "name": "eco_lifestyle",
+        "icon_url": "../img/base_pack/eco_lifestyle.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Slob",
+      "description": "These Sims are not affected by dirty surroundings, make household items dirtier faster, and can Rummage for Food in garbage.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Slob.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Neat"
+        },
+        {
+          "trait": "Proper"
+        },
+        {
+          "trait":"Squeamish"
+        }
+      ]
+    },
+    {
+      "name": "Snob",
+      "description": "These Sims can Critique Work on low quality items, are bored by \"low brow\" television, and gain Confidence around other Snob Sims.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Snob.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Childish"
+        },
+        {
+          "trait": "Freegan"
+        },
+        {
+          "trait":"Goofball"
+        }
+      ]
+    },
+    {
+      "name": "Squeamish",
+      "description": "Squeamish Sims are nauseated by the sight of creepy crawlies, vomiting, violence and death. These Sims become Uncomfortable near anything dirty.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Squeamish.webp",
+      "base_pack": {
+        "name": "outdoor_retreat",
+        "icon_url": "../img/base_pack/outdoor_retreat.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Freegan"
+        },
+        {
+          "trait": "Glutton"
+        },
+        {
+          "trait":"Loves Outdoors"
+        },
+        {
+          "trait": "Slob"
+        }
+      ]
+    },
+    {
+      "name": "Vegetarian",
+      "description": "These Sims will actively avoid eating foods that contain meat products and can become sick if they eat such foods.",
+      "category": "lifestyle",
+      "icon_url":"../img/trait/Trait_TS4_Vegetarian.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Bro",
+      "description": "These Sims can Bro Hug other Bros, gain Confidence around other Bros, and become Energized from Watching Sports.",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Bro.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Evil",
+      "description": "These Sims become Happy around Sims with negative Moodlets, can Laugh Maniacally and Discuss Evil Plans, and become Angry when interacting with Good Sims.",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Evil.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Childish"
+        },
+        {
+          "trait": "Good"
+        }
+      ]
+    },
+    {
+      "name": "Family-Oriented",
+      "description": "These Sims become Happy around family members, become Sad if they don't interact with family for a period of time, and can Boast about Family. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Family-Oriented.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Hates Children"
+        },
+        {
+          "trait": "Noncommittal"
+        }
+      ]
+    },
+    {
+      "name": "Good",
+      "description": "These Sims become Happy around Sims with positive Moodlets, can Donate to Charity, become Sad with interacting with Evil Sims, and can Discuss World Peace. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Good.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Evil"
+        },
+        {
+          "trait": "Kleptomaniac"
+        },
+        {
+          "trait": "Mean"
+        }
+      ]
+    },
+    {
+      "name": "Hates Children",
+      "description": "These Sims become Angry around Children, become Tense after Try for a Baby, and can be Mean to Children. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Hates_Children.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Childish"
+        },
+        {
+          "trait": "Family-Oriented"
+        }
+      ]
+    },
+    {
+      "name": "Insider",
+      "description": "These Sims love being in Clubs, and tend to be happiest when surrounded by their friends.",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Insider.webp",
+      "base_pack": {
+        "name": "get_together",
+        "icon_url": "../img/base_pack/get_together.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Loner"
+        }
+      ]
+    },
+    {
+      "name": "Jealous",
+      "description": "These Sims get Jealous more easily than other Sims. They gain a boost of Confidence from being around their significant other, but get Tense if they haven't seen them recently. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Jealous.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Loner",
+      "description": "These Sims become Happy when alone, do not receive negative Moodlets when their Social Need is low, become Tense around strangers, and become Embarrassed more often by social rejection. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Loner.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Insider"
+        },
+        {
+          "trait": "Outgoing"
+        }
+      ]
+    },
+    {
+      "name": "Mean",
+      "description": "These Sims become Happy when being Mean or Mischievous to other Sims and become Confident after winning a fight. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Mean.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Good"
+        },
+        {
+          "trait": "Proper"
+        }
+      ]
+    },
+    {
+      "name": "Noncommittal",
+      "description": "These Sims become Tense after a while in the same job or relationship, become Happy when they Quit a Job or Break Off a relationship, take longer to Propose, and can Discuss their Fear of Commitment. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Noncommittal.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Family-Oriented"
+        }
+      ]
+    },
+    {
+      "name": "Outgoing",
+      "description": "These Sims gain powerful Moodlets from Friendly socialization, have their Social need decay quickly, and gain more negative Moodlets when their Social need is low. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Outgoing.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Loner"
+        },
+        {
+          "trait": "Paranoid"
+        }
+      ]
+    },
+    {
+      "name": "Paranoid",
+      "description": "Paranoid Sims feel that danger is around every corner, and that people are always talking about them. Paranoid Sims feel a sense of security while hanging out in basements. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Paranoid.webp",
+      "base_pack": {
+        "name": "strangerville",
+        "icon_url": "../img/base_pack/strangerville.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Outgoing"
+        }
+      ]
+    },
+    {
+      "name": "Proper",
+      "description": "These Sims tend to disapprove of other Sims' improper behavior such as Mean or Mischievous socials, but find themselves happier in Formal Outfits and have a much easier time with Friendly and Romantic socials. ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Proper.webp",
+      "base_pack": {
+        "name": "snowy_escape",
+        "icon_url": "../img/base_pack/snowy_escape.webp"
+      },
+      "conflicts": [
+        {
+          "trait": "Mean"
+        },
+        {
+          "trait": "Slob"
+        }
+      ]
+    },
+    {
+      "name": "Self-Absorbed",
+      "description": "These Sims are all about themselves! They can Fish for Compliments, are more excited when receiving a present, and may become tense when they haven’t gotten enough attention. The celebrity spotlight is something they generally relish. After all, everyone else should love them as much as they do themselves, right? ",
+      "category": "social",
+      "icon_url":"../img/trait/Trait_TS4_Self-Absorbed.webp",
+      "base_pack": {
+        "name": "get_famous",
+        "icon_url": "../img/base_pack/get_famous.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Angelic",
+      "description": "Idyllic, easygoing Toddlers. They are never defiant and they don't throw a tantrum. They can easily talk to strangers. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Angelic.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Charmer",
+      "description": "These Toddlers love to socialize. They earn Communication skill faster, and don't suffer Stranger Danger from strangers. They can Share the Love with other Sims. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Charmer.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Clingy",
+      "description": "These shy Toddlers avoid Sims outside the household and get sad if left behind. They gain extra skill when taught. And they recover faster from bad moods when Comforted. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Clingy.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Fussy",
+      "description": "Tiny trouble-makers who love to Cry, cause trouble, and Throw Fits. But being noticed makes them Happy and helps them overcome negative Moodlets. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Fussy.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Independent",
+      "description": "These Toddlers love their freedom, and don't like to take orders from caregivers. They gain extra skill when they are left alone, and need less Attention than other Toddlers. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Independent.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Inquisitive",
+      "description": "Curious explorers. These Toddlers gain Thinking skill slightly faster. They are happiest when learning something, and sad if they haven't learned anything lately. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Inquisitive.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Silly",
+      "description": "Goofy and curious. These Toddlers love to tell jokes and get Playful. They earn Imagination skill slightly faster. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Silly.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    },
+    {
+      "name": "Wild",
+      "description": "Spirited and full of Energy. These Toddlers love to explore and get Energized. They earn Movement skill slightly faster. They get sad if they haven't been outside in a while. ",
+      "category": "toddler",
+      "icon_url":"../img/trait/Trait_TS4_Wild.webp",
+      "base_pack": {
+        "name": "basegame",
+        "icon_url": "../img/base_pack/basegame.webp"
+      },
+      "conflicts": [
+      ]
+    }
+  ]
+}

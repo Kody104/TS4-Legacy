@@ -1,0 +1,11 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("../img/Site-background-light.webp");
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+}
