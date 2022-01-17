@@ -1,11 +1,46 @@
+:root {
+    --color-white: #FFF;
+    --color-light-blue: #BFD7FF;
+    --color-blue: #2E70B7;
+    --color-link: #002BB8;
+    --color-hover: #001352;
+}
+
 *{
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+    color: var(--color-link);
+    transition: 0.1s color;
+}
+
+a:hover, a:focus {
+    color: var(--color-hover);
+    text-decoration: underline;
+}
+
 body {
     background-image: url("../img/Site-background-light.webp");
-    font-family: sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.6;
+}
+
+.site-wrapper {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.nav-header {
+    background-color: #9dd139;
+}
+
+.main-content {
+    background: var(--color-white) url('../img/TS4_Crystal.webp') repeat;
+    border: 2px solid var(--color-blue);
+    border-radius: 0.5rem;
+    padding: 1rem;
 }
