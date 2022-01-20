@@ -349,19 +349,36 @@ let running = (function() {
         return Math.floor(Math.random() * max);
     }
 
-    function selectRandomTrait() {
+    function selectRandomTrait(category, exclude) {
         let selected = [];
+        let pool = [];
         traitPool.forEach(trait => {
-            if(trait.isSelected) {
+            if(trait.isSelected) { // If the trait is already selected, skip adding it to the selection pool
                 selected.push(trait);
+            } else if(arguments.length == 2) { // If we have given parameters, check according to them
+                if(!exclude) { // We are only looking for this category of traits
+                    if(trait.trait.category === category) {
+                        pool.push(trait);
+                    }
+                } else if(exclude) { // We want everything that's not this category
+                    if(trait.trait.category !== category) {
+                        pool.push(trait);
+                    }
+                }
+            }
+            else if(arguments.length == 0) { // If there are no parameters given, we just push
+                pool.push(trait);
+            }
+            else { // Unknown paramters given
+                console.warn('Unknown paramters given.');
             }
         });
         let reset = false;
         let rTrait;
         do {
             reset = false;
-            let rand = getRandomInt(traitPool.length);
-            rTrait = traitPool[rand];
+            let rand = getRandomInt(pool.length);
+            rTrait = pool[rand];
             selected.every(select => {
                 if(select.trait.name === rTrait.trait.name) {
                     reset = true;
@@ -378,18 +395,19 @@ let running = (function() {
                 return true;
             });
         } while(reset);
-        rTrait.isSelected = true;
         return rTrait;
     }
 
     function randomizeTraits(condition) {
+        traitPool.forEach(trait => {
+            trait.isSelected = false;
+        });
+        let names = [];
         if(condition.toLowerCase() === 'true') {
-            traitPool.forEach(trait => {
-                trait.isSelected = false;
-            });
-            let names = [];
             for(let i = 0; i < 3; i++) {
-                names.push(selectRandomTrait().trait.name);
+                let rTrait = selectRandomTrait();
+                rTrait.isSelected = true;
+                names.push(rTrait.trait.name);
             }
             traitPool.forEach(trait => {
                 let li = trait.li;
@@ -405,9 +423,64 @@ let running = (function() {
                 }
             });
         } else if(condition.toLowerCase() === 'mood') {
+            for(let i = 0; i < 3; i++) {
+                let rTrait;
+                if(i === 0) {
+                    rTrait = selectRandomTrait('emotional', false);
+                    rTrait.isSelected = true;
+                    names.push(rTrait.trait.name);
+                }
+                else {
+                    rTrait = selectRandomTrait('emotional', true);
+                    rTrait.isSelected = true;
+                    names.push(rTrait.trait.name);
+                }
+            }
+            traitPool.forEach(trait => {
+                let li = trait.li;
+                li.innerHTML = trait.trait.name;
+                li.classList.remove('is-hidden');
+                li.classList.remove('border-green');
+                if(li.innerHTML === names[0] || li.innerHTML === names[1] || li.innerHTML === names[2]) {
+                    li.classList.add('border-green');
+                    trait.isSelected = true;
+                }
+                else {
+                    li.classList.add('is-hidden');
+                }
+            });
 
-        } else if(condition.toLowerCase === 'equal') {
-
+        } else if(condition.toLowerCase() === 'equal') {
+            let selected = [];
+            for(let i = 0; i < 3; i++) {
+                let rTrait = selectRandomTrait();
+                let mustBreak = false;
+                selected.forEach(select => {
+                    if(select.trait.category === rTrait.trait.category) {
+                        mustBreak = true;
+                    }
+                });
+                if(mustBreak) {
+                    i--;
+                    continue;
+                }
+                selected.push(rTrait);
+                rTrait.isSelected = true;
+                names.push(rTrait.trait.name);
+            }
+            traitPool.forEach(trait => {
+                let li = trait.li;
+                li.innerHTML = trait.trait.name;
+                li.classList.remove('is-hidden');
+                li.classList.remove('border-green');
+                if(li.innerHTML === names[0] || li.innerHTML === names[1] || li.innerHTML === names[2]) {
+                    li.classList.add('border-green');
+                    trait.isSelected = true;
+                }
+                else {
+                    li.classList.add('is-hidden');
+                }
+            });
         } else {
             console.warn(condition + ' is not a randomization option!');
         }
@@ -429,8 +502,9 @@ let running = (function() {
             li.innerHTML = trait.name;
 
             li.addEventListener('click', () => {
-                if(li.innerHTML === trait.name) {
-                    li.innerHTML = trait.description;
+                if(!li.innerHTML.includes('<br>')) {
+                    li.innerHTML = `Name: ${trait.name}<br>Description: ${trait.description}
+                    <br>Category: <span style="text-transform: capitalize;">${trait.category}</span>`;
                 }
                 else {
                     li.innerHTML = trait.name;
@@ -454,10 +528,12 @@ let running = (function() {
                     li.style.backgroundSize = '33.3%';
         
                     li.innerHTML += trait.name;
+                    console.log(li.innerHTML);
 
                     li.addEventListener('click', () => {
-                        if(li.innerHTML === trait.name) {
-                            li.innerHTML = trait.description;
+                        if(!li.innerHTML.includes('<br>')) {
+                            li.innerHTML = `Name: ${trait.name}<br>Description: ${trait.description}
+                    <br>Category: <span style="text-transform: capitalize;">${trait.category}</span>`;
                         } else {
                             li.innerHTML = trait.name;
                         }
