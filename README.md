@@ -8,8 +8,10 @@ A tool designed to help randomize traits for your heir so that every trait you a
 
 ### Create-A-Sim
 
-- Add DLC checkbox to elimnate unowned expansions
-- Create trait list and implement functionality
+- <strike>Add DLC checkbox to elimnate unowned expansions</strike>
+- <strike>Create trait list and implement functionality</strike>
+- Create trait randomization buttons and implement randomization functionality
+- Add age customization and traits for each age
 
 ### Save System
 
