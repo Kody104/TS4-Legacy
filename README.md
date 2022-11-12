@@ -10,14 +10,16 @@ A tool designed to help randomize traits for your heir so that every trait you a
 
 - <strike>Add DLC checkbox to elimnate unowned expansions</strike>
 - <strike>Create trait list and implement functionality</strike>
-- Create trait randomization buttons and implement randomization functionality
+- <strike>Create trait randomization buttons and implement randomization functionality</strike>
 - Add age customization and traits for each age
 
 ### Save System
 
-- Create a system to save your family dynasty
+- <strike>Create a system to save your family dynasty</strike>
+- Keep the save after browser close
 
 ### Edit Sim
 
-- Edit previously made sims
+- <strike>View individual sims</strike>
+- Edit individual sims
 - Delete individual sims

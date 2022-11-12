@@ -14,17 +14,18 @@
             </header>
             <section class="columns">
                 <div id="previous-sims-column" class="column slide-wrapper">
-                    <h3 class="column-title">Previously Played Heirs</h3>
+                    <h1 class="column-title">Previously Played Heirs</h1>
                     <button class="button" style="width: 100%;">Clear</button>
                     <div id="previous-sims-list">
                     </div>
                 </div>
                 <div id="create-a-sim" class="column slide-wrapper is-hidden">
-                    <button id="back-button" class="button" style="width: 25%;float: left;">Back</button><br><br>
-                    <h3 class="column-title">Create-An-Heir</h3>
+                    <button id="back-button-one" class="button" style="width: 25%;float: left;">Back</button>
+                    <button id="save-button" class="button is-hidden" style="width: 25%; float: right;">Save</button><br><br>
+                    <h2 class="column-title">Create-An-Heir</h2>
                     <form id="sim-form">
                         <input type="text" name="fname" placeholder="First Name"><br>
-                        <input type="text" name="lname" placeholder="Last Name">
+                        <input type="text" name="lname" placeholder="Last Name"><br>
                     </form>
                     <h3 class="subtitle">Traits</h3>
                     <button id="dlc-select-button" class="button">Expansion Packs</button>
@@ -51,11 +52,19 @@
                     </div>
                     <ul id="trait-list" class="trait-list is-grid grid-3-rows"></ul>
                 </div>
-                <div id="selected-traits" class="column is-hidden">
-                    <h3 class="column-title">Selected Traits</h3>
+                <div id="edit-sim" class="column slide-wrapper is-hidden">
+                    <button id="back-button-two" class="button" style="width: 25%;float: left;">Back</button><br><br>
+                    <h1 class="column-title"></h1>
+                    <h2 class="column-title"></h2>
+                    <h3 class="column-title">Traits</h3>
+                    <div id="selected-sim-traits">
+                    <ul class="trait-list is-grid grid-3-rows">
+                    </ul>
+                    </div>
                 </div>
             </section>
         </div>
         <script src="js/script.js"></script>
+        <script src="js/tota11y.min.js"></script>
     </body>
 </html>

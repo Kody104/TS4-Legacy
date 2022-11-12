@@ -1,4 +1,4 @@
-let traitRepo = (function() {
+const traitRepo = (function() {
 
     const traits = [];
     const base_packs = [];
@@ -78,18 +78,29 @@ let traitRepo = (function() {
 })();
 let dynastyRepo = (function() {
     let members = [
-        /*{
-            firstName: 'test',
-            lastName: 'one'
-        },
         {
-            firstName: 'test',
-            lastName: 'two'
-        }*/
+            firstName: 'Jeff',
+            lastName: 'Lowe',
+            age: 'Elder',
+            traits: ['Hot-Headed', 'Self-Assured', 'Ambitious']
+        }
     ];
+
+    function createSim(firstName, lastName, traitList, age) {
+        return {
+            firstName: firstName,
+            lastName: lastName,
+            age: age,
+            traits: traitList
+        }
+    }
 
     function getAll() {
         return members;
+    }
+
+    function addMember(member) {
+        members.push(member);
     }
 
     function deleteMember(index) {
@@ -101,18 +112,20 @@ let dynastyRepo = (function() {
     }
 
     return {
+        createSim: createSim,
         getAll: getAll,
+        addMember: addMember,
         deleteMember: deleteMember,
         clear: clear
     }
 })();
-let running = (function() {
+const running = (function() {
 
-    let dlcList = [];
+    const dlcList = [];
     let traitPool = [];
 
-    let buttonHandler = (function() {
-        let items = [];
+    const buttonHandler = (function() {
+        const items = [];
 
         function addButton(name, eventType, button, fnct) {
             items.push({
@@ -121,9 +134,6 @@ let running = (function() {
                 fnct: fnct,
                 bindListener: function() {
                     button.addEventListener(eventType, fnct);
-                },
-                unbindListener: function() {
-                    button.removeEventListener(eventType, fnct);
                 }
             });
         }
@@ -157,7 +167,7 @@ let running = (function() {
         }
     })();
 
-    let slide = {
+    const slide = {
         in: (element) => {
             return new Promise(resolve => {
                 element.classList.add('slide-in');
@@ -181,38 +191,55 @@ let running = (function() {
     };
 
     function init() {
-        let clearBtn = document.querySelector('#previous-sims-column button.button');
-        let backBtn = document.querySelector('#back-button');
-        let dlcSelectBtn = document.querySelector('#dlc-select-button');
-        let randomSelectBtn = document.querySelector('#randomize-select-button');
-        let trueRandomBtn = document.querySelector('#true-random-btn');
-        let moodRandomBtn = document.querySelector('#mood-random-btn');
-        let equalRandomBtn = document.querySelector('#equal-random-btn');
+        const clearBtn = document.querySelector('#previous-sims-column button.button');
+        const backBtnOne = document.querySelector('#back-button-one');
+        const backBtnTwo = document.querySelector('#back-button-two');
+        const saveBtn = document.querySelector('#save-button');
+        const dlcSelectBtn = document.querySelector('#dlc-select-button');
+        const randomSelectBtn = document.querySelector('#randomize-select-button');
+        const trueRandomBtn = document.querySelector('#true-random-btn');
+        const moodRandomBtn = document.querySelector('#mood-random-btn');
+        const equalRandomBtn = document.querySelector('#equal-random-btn');
 
         buttonHandler.addButton('clearBtn', 'click', clearBtn, () => {
             deleteFamilyDynasty();
         });
-        buttonHandler.addButton('backBtn', 'click', backBtn, () => {
+        buttonHandler.addButton('backBtn1', 'click', backBtnOne, () => {
             slide.out(document.querySelector('#create-a-sim'))
             .then( () => slide.in(document.querySelector('#previous-sims-column')));
         });
+        buttonHandler.addButton('backBtn2', 'click', backBtnTwo, () => {
+            slide.out(document.querySelector('#edit-sim'))
+            .then( () => slide.in(document.querySelector('#previous-sims-column')));
+        });
+        buttonHandler.addButton('saveBtn', 'click', saveBtn, () => {
+            if(!saveFamilyDynasty()) {
+                console.warn('Didn\'t save the family!');
+            }
+        });
         buttonHandler.addButton('dlcSelectBtn', 'click', dlcSelectBtn, () => {
-            let dlcSelect = document.querySelector('#dlc-select');
-            let randomSelect = document.querySelector('#randomize-select');
+            const dlcSelect = document.querySelector('#dlc-select');
+            const randomSelect = document.querySelector('#randomize-select');
 
             if(dlcSelect.classList.contains('is-hidden')) {
                 dlcSelect.classList.remove('is-hidden');
                 dlcSelectBtn.classList.add('is-selected');
                 randomSelect.classList.add('is-hidden');
                 randomSelectBtn.classList.remove('is-selected');
+                traitPool.forEach(trait => {
+                    trait.isSelected = false;
+                    trait.li.classList.remove('is-hidden');
+                    trait.li.classList.remove('border-green');
+                });
+                document.querySelector('#save-button').classList.add('is-hidden');
             } else {
                 dlcSelect.classList.add('is-hidden');
                 dlcSelectBtn.classList.remove('is-selected');
             }
         });
         buttonHandler.addButton('randomSelectBtn', 'click', randomSelectBtn, () => {
-            let randomSelect = document.querySelector('#randomize-select');
-            let dlcSelect = document.querySelector('#dlc-select');
+            const randomSelect = document.querySelector('#randomize-select');
+            const dlcSelect = document.querySelector('#dlc-select');
 
             if(randomSelect.classList.contains('is-hidden')) {
                 randomSelect.classList.remove('is-hidden');
@@ -227,6 +254,7 @@ let running = (function() {
                     trait.li.classList.remove('is-hidden');
                     trait.li.classList.remove('border-green');
                 });
+                document.querySelector('#save-button').classList.add('is-hidden');
             }
         });
         buttonHandler.addButton('trueRandomBtn', 'click', trueRandomBtn, () => {
@@ -245,7 +273,48 @@ let running = (function() {
 
         
 
-        let dlcBox = document.querySelector('#create-a-sim fieldset.is-grid');
+        const dlcBox = document.querySelector('#create-a-sim fieldset.is-grid');
+
+        const d = document.createElement('div');
+
+        const l = document.createElement('label');
+        l.setAttribute('for', 'all packs');
+        l.innerText = 'All Packs';
+
+        const c = document.createElement('input');
+        c.setAttribute('type', 'checkbox');
+        c.name = 'all_packs';
+
+        const checkFnc = function() {
+            c.checked = !c.checked;
+            if(c.checked) {
+                const boxes = document.querySelectorAll('div.dlc-item');
+                boxes.forEach(node => {
+                    node.childNodes[0].checked = true;
+                    dlcList.forEach(dlc => {
+                        dlc.isSelected = true;
+                    });
+                });
+            }
+            else {
+                const boxes = document.querySelectorAll('div.dlc-item');
+                boxes.forEach(node => {
+                    node.childNodes[0].checked = false;
+                    dlcList.forEach(dlc => {
+                        dlc.isSelected = false;
+                    });
+                });
+            }
+            refreshTraitList();
+        };
+
+        c.addEventListener('click', checkFnc);
+
+        d.appendChild(c);
+        d.appendChild(l);
+        d.addEventListener('click', checkFnc);
+
+        dlcBox.appendChild(d);
 
         // Wait for our traits to populate, then create dlc and traits
         traitRepo.parseTraitsJSON().then(() => {
@@ -255,20 +324,19 @@ let running = (function() {
                     return true;
                 }
                 dlcList.push({name: pack.name, isSelected: false});
-                let div = document.createElement('div');
+                const div = document.createElement('div');
+                div.classList.add('dlc-item');
     
-                let lbl = document.createElement('label');
+                const lbl = document.createElement('label');
                 lbl.setAttribute('for', pack.name);
                 lbl.innerText = (pack.name.replace(/_/g, ' ')); // Replaces all underscore characters with spaces
                 lbl.style.textTransform = 'capitalize';
     
-                let checkbox = document.createElement('input');
+                const checkbox = document.createElement('input');
                 checkbox.setAttribute('type', 'checkbox');
                 checkbox.name = pack.name;
-                div.appendChild(checkbox);
-                div.appendChild(lbl);
-                dlcBox.appendChild(div);
-                div.addEventListener('click', () =>{
+
+                const fnc = function() {
                     checkbox.checked = !checkbox.checked;
                     if(checkbox.checked) {
                         dlcList.forEach(dlc => {
@@ -284,7 +352,19 @@ let running = (function() {
                         });
                     }
                     refreshTraitList();
-                });
+                };
+
+                checkbox.addEventListener('click', fnc);
+
+                div.appendChild(checkbox);
+                div.appendChild(lbl);
+                dlcBox.appendChild(div);
+                div.addEventListener('click', fnc);
+
+                
+
+                //TODO: Pull from cache if necessary, create if necessary
+
                 return true;
             });
         })
@@ -296,52 +376,77 @@ let running = (function() {
     }
 
     function refreshDynasty() {
-        let prevContainer = document.querySelector('#previous-sims-list');
+        const prevContainer = document.querySelector('#previous-sims-list');
 
         prevContainer.innerHTML = '';
 
         if(dynastyRepo.getAll().length === 0) {
-            let list = document.createElement('ul');
-            let text = document.createElement('li');
+            const list = document.createElement('ul');
+            const text = document.createElement('li');
             text.innerText = 'Create a new sim';
             text.classList.add('button');
+            text.classList.add('border-green');
+            text.addEventListener('click', () =>{
+                slide.out(document.querySelector('#previous-sims-column'))
+                .then( () =>  slide.in(document.querySelector('#create-a-sim')));
+            });
+            list.appendChild(text);
+            prevContainer.appendChild(list);
+            buttonHandler.getButtonByName('clearBtn').button.disabled = true;
+        } else {
+            const list = document.createElement('ul');
+        
+            dynastyRepo.getAll().reverse().forEach(member => {
+                const li = document.createElement('li');
+                li.classList.add('button');
+                li.innerText = member.firstName + ' ' + member.lastName;
+                li.addEventListener('click', () => {
+                    selectSim(member);
+                    slide.out(document.querySelector('#previous-sims-column'))
+                    .then( () => slide.in(document.querySelector('#edit-sim')))
+                });
+                list.appendChild(li);
+            });
+            const text = document.createElement('li');
+            text.innerText = 'Create a new sim';
+            text.classList.add('button');
+            text.classList.add('border-green');
             text.addEventListener('click', () =>{
                 slide.out(document.querySelector('#previous-sims-column'))
                 .then( () => slide.in(document.querySelector('#create-a-sim')));
             });
             list.appendChild(text);
             prevContainer.appendChild(list);
-            buttonHandler.getButtonByName('clearBtn').button.disabled = true;
-        } else {
-            let list = document.createElement('ul');
-        
-            dynastyRepo.getAll().reverse().forEach(member => {
-                let li = document.createElement('li');
-                li.classList.add('button');
-                li.innerText = member.firstName + ' ' + member.lastName;
-                li.addEventListener('click', () => {
-                    selectSim(member, li);
-                });
-                list.appendChild(li);
-            });
-            prevContainer.appendChild(list);
             buttonHandler.getButtonByName('clearBtn').button.disabled = false;
         }
     }
 
-    function selectSim(sim, li) {
-        let list = document.querySelector('#previous-sims-list ul');
-        let items = list.childNodes;
-        items.forEach(item => {
-            if(li !== null && sim !== null) {
-                if(item.isEqualNode(li)) {
-                    item.classList.add('is-selected');
-                } else {
-                    item.classList.remove('is-selected');
+    function selectSim(member) {
+        const title = document.querySelector('#edit-sim h1.column-title');
+        title.innerText = `${member.firstName} ${member.lastName}`;
+        const curCycle = document.querySelector('#edit-sim h2.column-title');
+        curCycle.innerText = `Age: ${member.age}`;
+        const traitContainer = document.querySelector('#selected-sim-traits ul.trait-list');
+        traitContainer.innerHTML = '';
+        member.traits.forEach(trait => {
+            const li = document.createElement('li');
+            const tObj = traitRepo.getTraitByName(trait);
+            li.classList.add('button');
+            li.style.background = `white url(${tObj.icon_url}) no-repeat center`;
+            li.style.backgroundSize = '33.3%';
+            li.innerHTML = tObj.name;
+
+            li.addEventListener('click', () => {
+                if(!li.innerHTML.includes('<br>')) {
+                    li.innerHTML = `<span style="color: var(--color-blue);">Name</span>: ${tObj.name}<br><span style="color: var(--color-blue);">Description</span>: ${tObj.description}
+                    <br><span style="color: var(--color-blue);">Category</span>: <span style="text-transform: capitalize;">${tObj.category}</span>`;
                 }
-            } else {
-                item.classList.remove('is-selected');
-            }
+                else {
+                    li.innerHTML = tObj.name;
+                }
+            });
+
+            traitContainer.appendChild(li);
         });
     }
 
@@ -350,8 +455,8 @@ let running = (function() {
     }
 
     function selectRandomTrait(category, exclude) {
-        let selected = [];
-        let pool = [];
+        const selected = [];
+        const pool = [];
         traitPool.forEach(trait => {
             if(trait.isSelected) { // If the trait is already selected, skip adding it to the selection pool
                 selected.push(trait);
@@ -377,7 +482,7 @@ let running = (function() {
         let rTrait;
         do {
             reset = false;
-            let rand = getRandomInt(pool.length);
+            const rand = getRandomInt(pool.length);
             rTrait = pool[rand];
             selected.every(select => {
                 if(select.trait.name === rTrait.trait.name) {
@@ -402,15 +507,15 @@ let running = (function() {
         traitPool.forEach(trait => {
             trait.isSelected = false;
         });
-        let names = [];
+        const names = [];
         if(condition.toLowerCase() === 'true') {
             for(let i = 0; i < 3; i++) {
-                let rTrait = selectRandomTrait();
+                const rTrait = selectRandomTrait();
                 rTrait.isSelected = true;
                 names.push(rTrait.trait.name);
             }
             traitPool.forEach(trait => {
-                let li = trait.li;
+                const li = trait.li;
                 li.innerHTML = trait.trait.name;
                 li.classList.remove('is-hidden');
                 li.classList.remove('border-green');
@@ -425,19 +530,19 @@ let running = (function() {
         } else if(condition.toLowerCase() === 'mood') {
             for(let i = 0; i < 3; i++) {
                 let rTrait;
-                if(i === 0) {
+                if(i === 0) { // Only the first trait needs to be emotional
                     rTrait = selectRandomTrait('emotional', false);
                     rTrait.isSelected = true;
                     names.push(rTrait.trait.name);
                 }
-                else {
+                else { // Exclude emotional from the rest
                     rTrait = selectRandomTrait('emotional', true);
                     rTrait.isSelected = true;
                     names.push(rTrait.trait.name);
                 }
             }
             traitPool.forEach(trait => {
-                let li = trait.li;
+                const li = trait.li;
                 li.innerHTML = trait.trait.name;
                 li.classList.remove('is-hidden');
                 li.classList.remove('border-green');
@@ -451,9 +556,9 @@ let running = (function() {
             });
 
         } else if(condition.toLowerCase() === 'equal') {
-            let selected = [];
+            const selected = [];
             for(let i = 0; i < 3; i++) {
-                let rTrait = selectRandomTrait();
+                const rTrait = selectRandomTrait();
                 let mustBreak = false;
                 selected.forEach(select => {
                     if(select.trait.category === rTrait.trait.category) {
@@ -469,7 +574,7 @@ let running = (function() {
                 names.push(rTrait.trait.name);
             }
             traitPool.forEach(trait => {
-                let li = trait.li;
+                const li = trait.li;
                 li.innerHTML = trait.trait.name;
                 li.classList.remove('is-hidden');
                 li.classList.remove('border-green');
@@ -483,18 +588,20 @@ let running = (function() {
             });
         } else {
             console.warn(condition + ' is not a randomization option!');
+            return;
         }
+        document.querySelector('#save-button').classList.remove('is-hidden');
     }
 
     function refreshTraitList() {
-        let traitList = document.querySelector('#trait-list');
+        const traitList = document.querySelector('#trait-list');
         traitList.innerHTML = '';
         traitPool = [];
         traitRepo.getTraitsByBasePack('basegame').every(trait => {
             if(trait.category === 'toddler') {
                 return true;
             }
-            let li = document.createElement('li');
+            const li = document.createElement('li');
             li.classList.add('button');
             li.style.background = `white url(${trait.icon_url}) no-repeat center`;
             li.style.backgroundSize = '33.3%';
@@ -503,8 +610,8 @@ let running = (function() {
 
             li.addEventListener('click', () => {
                 if(!li.innerHTML.includes('<br>')) {
-                    li.innerHTML = `Name: ${trait.name}<br>Description: ${trait.description}
-                    <br>Category: <span style="text-transform: capitalize;">${trait.category}</span>`;
+                    li.innerHTML = `<span style="color: var(--color-blue);">Name</span>: ${trait.name}<br><span style="color: var(--color-blue);">Description</span>: ${trait.description}
+                    <br><span style="color: var(--color-blue);">Category</span>: <span style="text-transform: capitalize;">${trait.category}</span>`;
                 }
                 else {
                     li.innerHTML = trait.name;
@@ -522,18 +629,17 @@ let running = (function() {
         dlcList.forEach(dlc => {
             if(dlc.isSelected) {
                 traitRepo.getTraitsByBasePack(dlc.name).forEach( trait => {
-                    let li = document.createElement('li');
+                    const li = document.createElement('li');
                     li.classList.add('button');
                     li.style.background = `white url(${trait.icon_url}) no-repeat center`;
                     li.style.backgroundSize = '33.3%';
         
                     li.innerHTML += trait.name;
-                    console.log(li.innerHTML);
 
                     li.addEventListener('click', () => {
                         if(!li.innerHTML.includes('<br>')) {
-                            li.innerHTML = `Name: ${trait.name}<br>Description: ${trait.description}
-                    <br>Category: <span style="text-transform: capitalize;">${trait.category}</span>`;
+                            li.innerHTML = `<span style="color: var(--color-blue);">Name</span>: ${trait.name}<br><span style="color: var(--color-blue);">Description</span>: ${trait.description}
+                            <br><span style="color: var(--color-blue);">Category</span>: <span style="text-transform: capitalize;">${trait.category}</span>`;
                         } else {
                             li.innerHTML = trait.name;
                         }
@@ -548,7 +654,86 @@ let running = (function() {
                 });
             }
         });
-        console.log(traitPool);
+    }
+
+    function saveFamilyDynasty() {
+        const simName = document.querySelectorAll('#sim-form input');
+        if(!simName[0].value) {
+            if(simName[0].style.border) {
+                return true;
+            }
+            simName[0].style.border = '2px solid red';
+            const errDiv = document.createElement('div');
+            errDiv.style.border = '2px solid red';
+            errDiv.appendChild(document.createTextNode('You need a first name!'));
+            simName[0].after(errDiv);
+            setTimeout(() => {
+                errDiv.remove();
+                simName[0].style.border = '';
+            }, 3000);
+            return true;
+        } else if(!simName[1].value) {
+            if(simName[1].style.border) {
+                return true;
+            }
+            simName[1].style.border = '2px solid red';
+            const errDiv = document.createElement('div');
+            errDiv.style.border = '2px solid red';
+            errDiv.appendChild(document.createTextNode('You need a last name!'));
+            simName[1].after(errDiv);
+            setTimeout(() => {
+                errDiv.remove();
+                simName[1].style.border = '';
+            }, 3000);
+            return true;
+        } else {
+            const selected = [];
+            traitPool.forEach(trait => {
+                if(trait.isSelected) {
+                    selected.push(trait.trait.name); // Beautiful trait name
+                }
+            });
+            if(selected.length !== 3) {
+                const subtitle = document.querySelector('#create-a-sim h3.subtitle');
+                const errDiv = document.createElement('div');
+                errDiv.style.border = '2px solid red';
+                errDiv.appendChild(document.createTextNode(`Error: trait length = ${selected.length}`));
+                subtitle.before(errDiv);
+                setTimeout(() => {
+                    errDiv.remove();
+                }, 3000);
+            return false;
+            } else {
+                const familyMember = dynastyRepo.createSim(simName[0].value, simName[1].value, selected, 'Young Adult');
+                let mustBreak = false;
+                dynastyRepo.getAll().forEach(member => {
+                    if(member.firstName.toLowerCase() === familyMember.firstName.toLowerCase() &&
+                        member.lastName.toLowerCase() === familyMember.lastName.toLowerCase()) {
+                            const decision =  confirm(`It looks like ${familyMember.firstName} ${familyMember.lastName} has already been added in this family. Are you sure you want to add another?`);
+                            if(!decision) {
+                                mustBreak = true;
+                            }
+                        }
+                });
+                if(mustBreak) {
+                    return true;
+                }
+                dynastyRepo.addMember(familyMember);
+                refreshDynasty();
+                const subtitle = document.querySelector('#create-a-sim h3.subtitle');
+                const successDiv = document.createElement('div');
+                successDiv.style.border = '2px solid green';
+                successDiv.appendChild(document.createTextNode(`${familyMember.firstName}
+                 ${familyMember.lastName} has been saved!`));
+                subtitle.before(successDiv);
+                setTimeout(() => {
+                    successDiv.remove();
+                    slide.out(document.querySelector('#create-a-sim'))
+                    .then( () => slide.in(document.querySelector('#previous-sims-column')));
+                }, 1000);
+                return true;
+            }
+        }
     }
 
     function deleteFamilyDynasty() {

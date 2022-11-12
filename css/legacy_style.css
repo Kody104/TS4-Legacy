@@ -1,5 +1,6 @@
 :root {
     --color-white: #FFF;
+    --color-grey: #999;
     --color-light-blue: #BFD7FF;
     --color-blue: #2E70B7;
     --color-green: #9dd139;
@@ -51,8 +52,32 @@ form > input[type=text] {
     margin-bottom: 0.5rem;
 }
 
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.17em;
+}
+
+h4 {
+    font-size: 1em;
+}
+
+h5 {
+    font-size: .83em;
+}
+
+h6 {
+    font-size: .67em;
+}
+
 #previous-sims-list {
-    border: 1px solid var(--color-blue);
+    border: 1px solid var(--color-grey);
     border-radius: 0.125rem;
 }
 
@@ -91,11 +116,13 @@ form > input[type=text] {
     cursor: pointer;
     border-color: var(--color-hover);
     border-bottom: 1px solid rgba(0, 19, 82, 0.3);
+    border-right: 1px solid rgba(0, 19, 82, 0.3);
 }
 
 .is-selected {
     border-color: var(--color-hover);
     border-bottom: 1px solid rgba(0, 19, 82, 0.3);
+    border-right: 1px solid rgba(0, 19, 82, 0.3);
 }
 
 .is-hidden {
@@ -107,7 +134,7 @@ form > input[type=text] {
 }
 
 .border-green {
-    border-color: var(--color-green);
+    border: 2px solid var(--color-green);
 }
 
 .grid-3-rows {
