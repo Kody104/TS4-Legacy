@@ -22,20 +22,27 @@
                 <div id="create-a-sim" class="column slide-wrapper is-hidden">
                     <button id="back-button-one" class="button" style="width: 25%;float: left;">Back</button>
                     <button id="save-button" class="button is-hidden" style="width: 25%; float: right;">Save</button><br><br>
-                    <h2 class="column-title">Create-An-Heir</h2>
-                    <form id="sim-form">
+                    <h2 class="column-title">Add-An-Heir</h2>
+                    <form id="sim-form" class="border-grey-sm">
+                        <h3 class="column-title">Basic Info</h3>
                         <input type="text" name="fname" placeholder="First Name"><br>
                         <input type="text" name="lname" placeholder="Last Name"><br>
+                        <select id="age-select" name="lifestage">
+                            <option value="default">---Select Sim Age---</option>
+                            <option value="young-adult">Young Adult</option>
+                            <option value="adult">Adult</option>
+                            <option value="elder">Elder</option>
+                        </select>
                     </form>
                     <h3 class="subtitle">Traits</h3>
                     <button id="dlc-select-button" class="button">Expansion Packs</button>
                     <button id="randomize-select-button" class="button">Randomize Traits</button>
                     <div id="dlc-select" class="is-hidden">
-                        <fieldset class="is-grid grid-3-rows" style="margin-bottom: 0.5rem; padding: 0.5rem;">
-                        </fieldset>
+                        <div class="is-grid grid-3-rows border-grey-sm" style="margin-bottom: 0.5rem; padding: 0.5rem;">
+                        </div>
                     </div>
                     <div id="randomize-select" class="is-hidden">
-                        <fieldset class="is-grid grid-3-rows" style="margin-bottom: 0.5rem; padding: 0.5rem;">
+                        <div class="is-grid grid-3-rows border-grey-sm" style="margin-bottom: 0.5rem; padding: 0.5rem;">
                             <p style="grid-column: 1;">
                                 Randomly selects traits with no preference for categories.
                             </p>
@@ -48,7 +55,7 @@
                             <button id="true-random-btn" class="button border-green">All Random</button>
                             <button id="mood-random-btn" class="button border-green">Mood Random</button>
                             <button id="equal-random-btn" class="button border-green">Equality Random</button>
-                        </fieldset>
+                        </div>
                     </div>
                     <ul id="trait-list" class="trait-list is-grid grid-3-rows"></ul>
                 </div>

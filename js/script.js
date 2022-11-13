@@ -96,7 +96,11 @@ let dynastyRepo = (function() {
     }
 
     function getAll() {
-        return members;
+        const copy = [];
+        for(let i = 0; i < members.length; i++) {
+            copy.push(members[i]);
+        }
+        return copy;
     }
 
     function addMember(member) {
@@ -190,6 +194,13 @@ const running = (function() {
         }
     };
 
+    function createErrorDiv(text) {
+        const errDiv = document.createElement('div');
+        errDiv.style.border = '2px solid red';
+        errDiv.appendChild(document.createTextNode(text));
+        return errDiv;
+    }
+
     function init() {
         const clearBtn = document.querySelector('#previous-sims-column button.button');
         const backBtnOne = document.querySelector('#back-button-one');
@@ -273,7 +284,7 @@ const running = (function() {
 
         
 
-        const dlcBox = document.querySelector('#create-a-sim fieldset.is-grid');
+        const dlcBox = document.querySelector('#create-a-sim div.is-grid');
 
         const d = document.createElement('div');
 
@@ -383,12 +394,12 @@ const running = (function() {
         if(dynastyRepo.getAll().length === 0) {
             const list = document.createElement('ul');
             const text = document.createElement('li');
-            text.innerText = 'Create a new sim';
+            text.innerText = 'Add a new sim';
             text.classList.add('button');
             text.classList.add('border-green');
             text.addEventListener('click', () =>{
                 slide.out(document.querySelector('#previous-sims-column'))
-                .then( () =>  slide.in(document.querySelector('#create-a-sim')));
+                .then( () => slide.in(document.querySelector('#create-a-sim')));
             });
             list.appendChild(text);
             prevContainer.appendChild(list);
@@ -408,7 +419,7 @@ const running = (function() {
                 list.appendChild(li);
             });
             const text = document.createElement('li');
-            text.innerText = 'Create a new sim';
+            text.innerText = 'Add a new sim';
             text.classList.add('button');
             text.classList.add('border-green');
             text.addEventListener('click', () =>{
@@ -425,7 +436,7 @@ const running = (function() {
         const title = document.querySelector('#edit-sim h1.column-title');
         title.innerText = `${member.firstName} ${member.lastName}`;
         const curCycle = document.querySelector('#edit-sim h2.column-title');
-        curCycle.innerText = `Age: ${member.age}`;
+        curCycle.innerHTML = `Age: <span style="text-transform: capitalize;">${member.age}</span>`;
         const traitContainer = document.querySelector('#selected-sim-traits ul.trait-list');
         traitContainer.innerHTML = '';
         member.traits.forEach(trait => {
@@ -663,9 +674,7 @@ const running = (function() {
                 return true;
             }
             simName[0].style.border = '2px solid red';
-            const errDiv = document.createElement('div');
-            errDiv.style.border = '2px solid red';
-            errDiv.appendChild(document.createTextNode('You need a first name!'));
+            const errDiv = createErrorDiv('You need a first name!');
             simName[0].after(errDiv);
             setTimeout(() => {
                 errDiv.remove();
@@ -677,9 +686,7 @@ const running = (function() {
                 return true;
             }
             simName[1].style.border = '2px solid red';
-            const errDiv = document.createElement('div');
-            errDiv.style.border = '2px solid red';
-            errDiv.appendChild(document.createTextNode('You need a last name!'));
+            const errDiv = createErrorDiv('You need a last name!');
             simName[1].after(errDiv);
             setTimeout(() => {
                 errDiv.remove();
@@ -695,16 +702,24 @@ const running = (function() {
             });
             if(selected.length !== 3) {
                 const subtitle = document.querySelector('#create-a-sim h3.subtitle');
-                const errDiv = document.createElement('div');
-                errDiv.style.border = '2px solid red';
-                errDiv.appendChild(document.createTextNode(`Error: trait length = ${selected.length}`));
+                const errDiv = createErrorDiv(`Error: trait length = ${selected.length}`);
                 subtitle.before(errDiv);
                 setTimeout(() => {
                     errDiv.remove();
                 }, 3000);
-            return false;
+                return false;
             } else {
-                const familyMember = dynastyRepo.createSim(simName[0].value, simName[1].value, selected, 'Young Adult');
+                const lifestage = document.querySelector('#age-select');
+                if(lifestage.value === 'default') {
+                    const errDiv = createErrorDiv('You need to select your sim\'s age!');
+                    lifestage.after(errDiv);
+                    setTimeout(() => {
+                        errDiv.remove();
+                    }, 3000);
+                    return true;
+                }
+                const age = lifestage.value.includes('-') ? lifestage.value.replace('-', ' ') : lifestage.value;
+                const familyMember = dynastyRepo.createSim(simName[0].value, simName[1].value, selected, age);
                 let mustBreak = false;
                 dynastyRepo.getAll().forEach(member => {
                     if(member.firstName.toLowerCase() === familyMember.firstName.toLowerCase() &&
