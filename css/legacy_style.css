@@ -6,6 +6,7 @@
     --color-green: #9dd139;
     --color-link: #002BB8;
     --color-hover: #001352;
+    --color-light-red: #ffa3a3;
 }
 
 *{
@@ -125,6 +126,13 @@ h6 {
     border-right: 1px solid rgba(0, 19, 82, 0.3);
 }
 
+.button:active {
+    cursor: pointer;
+    border-color: var(--color-hover);
+    border-top: 1px solid rgba(0, 19, 82, 0.3);
+    border-left: 1px solid rgba(0, 19, 82, 0.3);
+}
+
 .is-selected {
     border-color: var(--color-hover);
     border-bottom: 1px solid rgba(0, 19, 82, 0.3);
@@ -191,4 +199,14 @@ h6 {
 
 .slide-out {
     transform: translate(150%);
+}
+
+.noscriptmsg {
+    text-align: center;
+    color: black;
+    text-shadow:
+        -1px -1px 0 #FFF,
+        1px -1px 0 #FFF,
+        -1px 1px 0 #FFF,
+        1px 1px 0 #FFF;
 }

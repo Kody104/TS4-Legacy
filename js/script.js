@@ -81,7 +81,7 @@ let dynastyRepo = (function() {
         {
             firstName: 'Jeff',
             lastName: 'Lowe',
-            age: 'Elder',
+            age: 'elder',
             traits: ['Hot-Headed', 'Self-Assured', 'Ambitious']
         }
     ];
@@ -93,6 +93,15 @@ let dynastyRepo = (function() {
             age: age,
             traits: traitList
         }
+    }
+
+    function getMemberByName(name) {
+        for(let i = 0; i < members.length; i++) {
+            if(name.includes(members[i].firstName) && name.includes(members[i].lastName)) {
+                return members[i];
+            }
+        }
+        return null;
     }
 
     function getAll() {
@@ -107,8 +116,18 @@ let dynastyRepo = (function() {
         members.push(member);
     }
 
-    function deleteMember(index) {
+    function deleteMemberByIndex(index) {
         members.splice(index, 1);
+    }
+
+    function deleteMemberByName(name) {
+        for(let i = 0; i < members.length; i++) {
+            if(name.includes(members[i].firstName) && name.includes(members[i].lastName)) {
+                deleteMemberByIndex(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     function clear() {
@@ -117,9 +136,11 @@ let dynastyRepo = (function() {
 
     return {
         createSim: createSim,
+        getMemberByName: getMemberByName,
         getAll: getAll,
         addMember: addMember,
-        deleteMember: deleteMember,
+        deleteMemberByIndex: deleteMemberByIndex,
+        deleteMemberByName: deleteMemberByName,
         clear: clear
     }
 })();
@@ -205,12 +226,14 @@ const running = (function() {
         const clearBtn = document.querySelector('#previous-sims-column button.button');
         const backBtnOne = document.querySelector('#back-button-one');
         const backBtnTwo = document.querySelector('#back-button-two');
-        const saveBtn = document.querySelector('#save-button');
+        const saveBtnOne = document.querySelector('#save-button-one');
+        const saveBtnTwo = document.querySelector('#save-button-two');
         const dlcSelectBtn = document.querySelector('#dlc-select-button');
         const randomSelectBtn = document.querySelector('#randomize-select-button');
         const trueRandomBtn = document.querySelector('#true-random-btn');
         const moodRandomBtn = document.querySelector('#mood-random-btn');
         const equalRandomBtn = document.querySelector('#equal-random-btn');
+        const deleteBtn = document.querySelector('#delete-button');
 
         buttonHandler.addButton('clearBtn', 'click', clearBtn, () => {
             deleteFamilyDynasty();
@@ -223,7 +246,12 @@ const running = (function() {
             slide.out(document.querySelector('#edit-sim'))
             .then( () => slide.in(document.querySelector('#previous-sims-column')));
         });
-        buttonHandler.addButton('saveBtn', 'click', saveBtn, () => {
+        buttonHandler.addButton('saveBtn1', 'click', saveBtnOne, () => {
+            if(!saveFamilyDynasty()) {
+                console.warn('Didn\'t save the family!');
+            }
+        });
+        buttonHandler.addButton('saveBtn2', 'click', saveBtnTwo, () => {
             if(!saveFamilyDynasty()) {
                 console.warn('Didn\'t save the family!');
             }
@@ -242,7 +270,7 @@ const running = (function() {
                     trait.li.classList.remove('is-hidden');
                     trait.li.classList.remove('border-green');
                 });
-                document.querySelector('#save-button').classList.add('is-hidden');
+                document.querySelector('#save-button-one').classList.add('is-hidden');
             } else {
                 dlcSelect.classList.add('is-hidden');
                 dlcSelectBtn.classList.remove('is-selected');
@@ -265,7 +293,7 @@ const running = (function() {
                     trait.li.classList.remove('is-hidden');
                     trait.li.classList.remove('border-green');
                 });
-                document.querySelector('#save-button').classList.add('is-hidden');
+                document.querySelector('#save-button-one').classList.add('is-hidden');
             }
         });
         buttonHandler.addButton('trueRandomBtn', 'click', trueRandomBtn, () => {
@@ -276,6 +304,32 @@ const running = (function() {
         });
         buttonHandler.addButton('equalRandomBtn', 'click', equalRandomBtn, () => {
             randomizeTraits('equal');
+        });
+        buttonHandler.addButton('deleteBtn', 'click', deleteBtn, () => {
+            const columnTitle = document.querySelector('#edit-sim h1.column-title');
+            const dName = columnTitle.innerText;
+            const decision = confirm(`Are you sure you want to delete ${dName}?`);
+            if(decision) {
+                if(dynastyRepo.deleteMemberByName(dName)) {
+                    refreshDynasty();
+                    const successDiv = document.createElement('div');
+                    successDiv.style.border = '2px solid green';
+                    successDiv.appendChild(document.createTextNode(`${dName} has been deleted from the family tree!`));
+                    columnTitle.before(successDiv);
+                    setTimeout(() => {
+                        successDiv.remove();
+                        slide.out(document.querySelector('#edit-sim'))
+                        .then( () => slide.in(document.querySelector('#previous-sims-column')));
+                    }, 1000);
+                }
+                else {
+                    const errDiv = createErrorDiv(`Didn't delete ${dName} because they didn't exist in the family!`);
+                    columnTitle.before(errDiv);
+                    setTimeout(()=> {
+                        errDiv.remove();
+                    }, 3000);
+                }
+            }
         });
 
         buttonHandler.getAllButtons().forEach(btn => {
@@ -601,7 +655,7 @@ const running = (function() {
             console.warn(condition + ' is not a randomization option!');
             return;
         }
-        document.querySelector('#save-button').classList.remove('is-hidden');
+        document.querySelector('#save-button-one').classList.remove('is-hidden');
     }
 
     function refreshTraitList() {
@@ -712,9 +766,12 @@ const running = (function() {
                 const lifestage = document.querySelector('#age-select');
                 if(lifestage.value === 'default') {
                     const errDiv = createErrorDiv('You need to select your sim\'s age!');
+                    lifestage.style.background = 'var(--color-light-red)';
+                    lifestage.style.border = '2px solid red';
                     lifestage.after(errDiv);
                     setTimeout(() => {
                         errDiv.remove();
+                        lifestage.style = '';
                     }, 3000);
                     return true;
                 }
